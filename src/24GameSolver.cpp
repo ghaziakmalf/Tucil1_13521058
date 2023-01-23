@@ -235,7 +235,7 @@ double calc(double a, char op, double b) {
 	}
 }
 
-vector <vector<int>> permutate(vector<int> &nums) {
+vector <vector<int>> permutation(vector<int> &nums) {
 	/* Calculate vector of vector containing permutations */
 
 	if (nums.size() <= 1) {
@@ -246,7 +246,7 @@ vector <vector<int>> permutate(vector<int> &nums) {
 	for (int i = 0; i < nums.size(); i ++) {
 		vector<int> v(nums.begin(), nums.end());
 		v.erase(v.begin() + i);
-		auto res = permutate(v);
+		auto res = permutation(v);
 
 		for (int j = 0; j < res.size(); j ++) {
 			vector<int> _v = res[j];
@@ -349,7 +349,7 @@ void app() {
 
 
     /* Main Algorithm (Brute Force) */
-	vector <vector<int>> permutateNumbers = permutate(numbers);
+	vector <vector<int>> permutateNumbers = permutation(numbers);
 	vector <vector<int>> hasil;
 
 	char operators[4] = { '+', '-', '*', '/' };
