@@ -336,7 +336,7 @@ void app() {
 	}
     else {
 		numbers = randomInput();
-		cout << endl << GREEN << "Your cards are: " << RESET;
+		cout << endl << GREEN << "Selected cards: " << RESET;
 		for (auto x:numbers) {
 			cout << WHITE << numToString(x) << " " << RESET;
 		}
