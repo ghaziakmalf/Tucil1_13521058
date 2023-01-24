@@ -305,16 +305,16 @@ int commandInput() {
 
 	while (true) {
 		cout << WHITE << ">> " << RESET;
-        cin >> input;
+		cin >> input;
 		if (input == 1 || input == 2) {
 			break;
 		}
         else {
 			cin.clear();
+    		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 			cout << endl << RED << "Please enter a valid input! (1/2)" << RESET << endl;
 		}
 	}
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
 	return input;
 }
