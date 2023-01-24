@@ -14,11 +14,11 @@ g++ src/24GameSolver.cpp -o bin/24GameSolver
 ```
 Program dapat dijalankan dengan cara:
 ```bash
-bin/24GameSolver.exe
+bin/24GameSolver
 
 atau
 
-Jalankan program langsung dengan double klik file '24GameSolver' dalam folder 'bin'
+bin/24GameSolver.exe
 ```
 
 ## Author
