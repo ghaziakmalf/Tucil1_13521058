@@ -449,7 +449,7 @@ void app() {
         ofstream MyFile;
 
         // Open file
-        MyFile.open("../test/" + filename + ".txt");
+        MyFile.open("test/" + filename + ".txt");
 
         // Write to file
         for (auto x:numbers) {
