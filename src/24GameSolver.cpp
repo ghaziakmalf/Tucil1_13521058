@@ -307,12 +307,13 @@ int commandInput() {
 		cout << WHITE << ">> " << RESET;
 		cin >> input;
 		if (input == 1 || input == 2) {
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 			break;
 		}
         else {
-			cin.clear();
-    		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 			cout << endl << RED << "Please enter a valid input! (1/2)" << RESET << endl;
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		}
 	}
 
@@ -373,20 +374,20 @@ void app() {
 						hasil.push_back({2, a, opToNum(operators[i]), b, opToNum(operators[j]), c, opToNum(operators[k]), d});
 					}
 
-					// (N OP N) OP (N OP N)
-					if (absolute(calc(calc(a, operators[i], b), operators[j], calc(c, operators[k], d)) - 24) < __FLT_EPSILON__) {
-						hasil.push_back({0, a, opToNum(operators[i]), b, opToNum(operators[j]), c, opToNum(operators[k]), d});
-					}
+					// N OP (N OP (N OP N)) 
+					if (absolute(calc(a, operators[i], calc(b, operators[j], calc(c, operators[k], d))) - 24) < __FLT_EPSILON__) {
+						hasil.push_back({3, a, opToNum(operators[i]), b, opToNum(operators[j]), c, opToNum(operators[k]), d});
+					} 
 
 					// N OP ((N OP N) OP N)
 					if (absolute(calc(a, operators[i], calc(calc(b, operators[j], c), operators[k], d)) - 24) < __FLT_EPSILON__) {
 						hasil.push_back({4, a, opToNum(operators[i]), b, opToNum(operators[j]), c, opToNum(operators[k]), d});
 					}
 
-					// N OP (N OP (N OP N)) 
-					if (absolute(calc(a, operators[i], calc(b, operators[j], calc(c, operators[k], d))) - 24) < __FLT_EPSILON__) {
-						hasil.push_back({3, a, opToNum(operators[i]), b, opToNum(operators[j]), c, opToNum(operators[k]), d});
-					} 
+					// (N OP N) OP (N OP N)
+					if (absolute(calc(calc(a, operators[i], b), operators[j], calc(c, operators[k], d)) - 24) < __FLT_EPSILON__) {
+						hasil.push_back({5, a, opToNum(operators[i]), b, opToNum(operators[j]), c, opToNum(operators[k]), d});
+					}
 				}
 			}
 		}
@@ -406,9 +407,6 @@ void app() {
         for (it = s.begin(); it != s.end(); it++) {
             const std::vector<int>& x = (*it);
             switch (x[0]) {
-                case 0:
-                    cout << WHITE << "(" << x[1] << " " << operators[x[2]] << " " << x[3] << ") " << operators[x[4]] << " (" << x[5] << " " << operators[x[6]] << " " << x[7] << ")" << RESET << endl;
-                    break;
                 case 1:
                     cout << WHITE << "(("<< x[1] << " " << operators[x[2]] << " " << x[3] << ") " << operators[x[4]] << " " << x[5] << ") " << operators[x[6]] << " " << x[7] << RESET << endl;
                     break;
@@ -420,6 +418,9 @@ void app() {
                     break;
                 case 4:
                     cout << WHITE << x[1] << " " << operators[x[2]] << " ((" << x[3] << " " << operators[x[4]] << " " << x[5] << ") " << operators[x[6]] << " " << x[7] << ")" << RESET << endl;
+                    break;
+                case 5:
+                    cout << WHITE << "(" << x[1] << " " << operators[x[2]] << " " << x[3] << ") " << operators[x[4]] << " (" << x[5] << " " << operators[x[6]] << " " << x[7] << ")" << RESET << endl;
                     break;
             }
         }
